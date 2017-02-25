@@ -11,8 +11,13 @@ public class Cubes : MonoBehaviour
     [SerializeField] Material _material;
     [SerializeField] float _scale = 0.1f;
 
+    [SerializeField, HideInInspector] Shader _feedbackShader;
+
     Mesh _bulkMesh;
     MaterialPropertyBlock _props;
+
+    Material _feedbackMaterial;
+    RenderTexture _feedbackBuffer;
 
     void OnValidate()
     {
@@ -24,17 +29,34 @@ public class Cubes : MonoBehaviour
     void OnDestroy()
     {
         Destroy(_bulkMesh);
+
+        if (_feedbackBuffer != null)
+            RenderTexture.ReleaseTemporary(_feedbackBuffer);
+
+        Destroy(_feedbackMaterial);
     }
 
     void Start()
     {
         _bulkMesh = BuildBulkMesh();
         _props = new MaterialPropertyBlock();
+        _feedbackMaterial = new Material(_feedbackShader);
     }
 
     void Update()
     {
-        _props.SetTexture("_ModTex", _source);
+        var rt = RenderTexture.GetTemporary(
+            _source.width, _source.height, 0, RenderTextureFormat.ARGBHalf
+        );
+
+        _feedbackMaterial.SetTexture("_PrevTex", _feedbackBuffer);
+        Graphics.Blit(_source, rt, _feedbackMaterial, 0);
+
+        if (_feedbackBuffer != null)
+            RenderTexture.ReleaseTemporary(_feedbackBuffer);
+        _feedbackBuffer = rt;
+
+        _props.SetTexture("_ModTex", _feedbackBuffer);
         _props.SetFloat("_Scale", _scale);
         _props.SetVector("_Extent", _extent);
 
