@@ -344,7 +344,7 @@ namespace Kino
             if (ambientOnly) UpdateMaterialProperties();
         }
 
-//        [ImageEffectOpaque]
+        [ImageEffectOpaque]
         void OnRenderImage(RenderTexture source, RenderTexture destination)
         {
             if (ambientOnly)
