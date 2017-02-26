@@ -2,8 +2,12 @@
 #include "SimplexNoise2D.cginc"
 
 sampler2D _ModTex;
-half _Scale;
+half _Threshold;
 half2 _Extent;
+half _ZMove;
+half _Scale;
+half2 _NoiseParams; // (frequency, speed)
+half3 _NoiseAmp;    // (position, rotation, scale)
 
 // Quaternion multiplication
 // http://mathworld.wolfram.com/Quaternion.html
@@ -31,21 +35,32 @@ float4 RotationAngleAxis(float angle, float3 axis)
     return float4(axis * sn, cs);
 }
 
-void ModifyVertex(inout float3 vp, inout float3 norm, float2 uv)
+// Vertex modifier function
+void ModifyVertex(inout float3 position, inout float3 normal, float2 uv)
 {
-    float3 sn = snoise(uv * 8.3 + float2(0, _Time.y * 0.6));
+    // Modifier amount
+    half amount = tex2Dlod(_ModTex, float4(uv, 0, 0)).r;
+    amount = saturate((amount - _Threshold) / (1 - _Threshold));
 
-    float samp = tex2Dlod(_ModTex, float4(uv, 0, 0)).r;
+    // Reference point in the noise field
+    half2 noise_pos = uv * _NoiseParams.x;
+    noise_pos.y = noise_pos.y * _Extent.y / _Extent.x + _NoiseParams.y * _Time.y;
 
-    float l = pow(saturate((samp - 0.05) / 0.95), 0.25);
+    // (noise grad x, noise grad y, noise value)
+    half3 nfield = snoise(noise_pos);
 
-    float3 dpos = float3(_Extent * (uv - 0.5f) + sn.xy * _Scale * 0.3 * (1 - l), -0.1f * l);
+    // Displacement
+    half3 disp = half3(_Extent * (uv - 0.5f), _ZMove * amount);
+    disp.xy += nfield.xy * (_NoiseAmp.x * (1 - amount));
 
-    float scale = _Scale * l * (1 + sn.z * 0.4);
+    // Rotation
+    float3 raxis = normalize(float3(nfield.xy, 0*nfield.z));
+    float4 rot = RotationAngleAxis(_NoiseAmp.y * (1 - amount), raxis);
 
-    float4 rot1 = RotationAngleAxis(sn.x * 0.5 * (1 - l) , float3(0, 1, 0));
-    float4 rot2 = RotationAngleAxis(sn.y * 0.5 * (1 - l) , float3(1, 0, 0));
+    // Scaling
+    float scale = _Scale * amount * (1 + _NoiseAmp.z * nfield.z);
 
-    vp = RotateVector(vp, QMul(rot1, rot2)) * scale + dpos;
-    norm = RotateVector(norm, QMul(rot1, rot2));
+    // Apply modification
+    position = RotateVector(position, rot) * scale + disp;
+    normal = RotateVector(normal, rot);
 }

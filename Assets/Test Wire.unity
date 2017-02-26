@@ -237,8 +237,16 @@ MonoBehaviour:
   _rows: 27
   _extent: {x: 2, y: 1.125}
   _source: {fileID: 8400000, guid: 14c27166eff2818458abea2e9295eae5, type: 2}
-  _scale: 0.08
-  _material: {fileID: 2100000, guid: 16564f4dd23f1ac46b7d0034e7ce90f9, type: 2}
+  _threshold: 0.038
+  _decaySpeed: 4
+  _voxelScale: 0.12
+  _voxelMaterial: {fileID: 2100000, guid: 16564f4dd23f1ac46b7d0034e7ce90f9, type: 2}
+  _zMove: 0
+  _noiseFrequency: 8
+  _noiseSpeed: 1
+  _noiseToPosition: 0.004
+  _noiseToRotation: 60
+  _noiseToScale: 0.3
   _debug: 0
   _baseMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   _feedbackShader: {fileID: 4800000, guid: ef10d4a521db6da48b2bed05eba76881, type: 3}
@@ -324,7 +332,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 100
-  field of view: 12
+  field of view: 11
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -387,7 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fcefc19977256540b441751a463e97f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fillColor: {r: 0, g: 0, b: 0, a: 1}
+  _fillColor: {r: 0, g: 0.057809494, b: 0.44117647, a: 1}
   _lineColor: {r: 1, g: 1, b: 1, a: 1}
   _shader: {fileID: 4800000, guid: f33eba059cc36df4aa294173b81db4b6, type: 3}
 --- !u!1 &1852574362

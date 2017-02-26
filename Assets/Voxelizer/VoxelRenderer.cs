@@ -7,13 +7,25 @@ namespace Voxelizer
     {
         #region Editable properties
 
+        [Space]
         [SerializeField] int _columns = 32;
         [SerializeField] int _rows = 18;
         [SerializeField] Vector2 _extent = new Vector2(3.2f, 1.8f);
+        [Space]
         [SerializeField] RenderTexture _source;
+        [SerializeField, Range(0, 1)] float _threshold = 0.05f;
         [SerializeField, Range(1, 10)] float _decaySpeed = 5;
-        [SerializeField] float _scale = 0.1f;
-        [SerializeField] Material _material;
+        [Space]
+        [SerializeField] float _voxelScale = 0.25f;
+        [SerializeField] Material _voxelMaterial;
+        [Space]
+        [SerializeField] float _zMove = -0.1f;
+        [SerializeField] float _noiseFrequency = 10;
+        [SerializeField] float _noiseSpeed = 0.5f;
+        [SerializeField] float _noiseToPosition = 0.015f;
+        [SerializeField] float _noiseToRotation = 60;
+        [SerializeField] float _noiseToScale = 0.5f;
+        [Space]
         [SerializeField] bool _debug;
 
         #endregion
@@ -39,7 +51,7 @@ namespace Voxelizer
         {
             _columns = Mathf.Clamp(_columns, 1, 128);
             _rows = Mathf.Clamp(_rows, 1, 128);
-            _scale = Mathf.Max(_scale, 0.0f);
+            _voxelScale = Mathf.Max(_voxelScale, 0.0f);
         }
 
         void OnDestroy()
@@ -61,11 +73,12 @@ namespace Voxelizer
         void Update()
         {
             var rt = RenderTexture.GetTemporary(
-                _source.width, _source.height, 0, RenderTextureFormat.RHalf
+                _source.width / 4, _source.height / 4, 0, RenderTextureFormat.RHalf
             );
 
             _feedbackMaterial.SetTexture("_PrevTex", _feedbackBuffer);
             _feedbackMaterial.SetFloat("_Convergence", -_decaySpeed);
+
             Graphics.Blit(_source, rt, _feedbackMaterial, 0);
 
             if (_feedbackBuffer != null)
@@ -73,11 +86,19 @@ namespace Voxelizer
             _feedbackBuffer = rt;
 
             _props.SetTexture("_ModTex", _feedbackBuffer);
-            _props.SetFloat("_Scale", _scale);
+            _props.SetFloat("_Threshold", _threshold);
             _props.SetVector("_Extent", _extent);
+            _props.SetFloat("_ZMove", _zMove);
+            _props.SetFloat("_Scale", _voxelScale);
+            _props.SetVector("_NoiseParams", new Vector2(
+                _noiseFrequency, _noiseSpeed
+            ));
+            _props.SetVector("_NoiseAmp", new Vector3(
+                _noiseToPosition, Mathf.Deg2Rad * _noiseToRotation, _noiseToScale
+            ));
 
             Graphics.DrawMesh(
-                _bulkMesh, transform.localToWorldMatrix, _material,
+                _bulkMesh, transform.localToWorldMatrix, _voxelMaterial,
                 gameObject.layer, null, 0, _props
             );
         }

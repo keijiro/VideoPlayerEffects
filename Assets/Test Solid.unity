@@ -237,9 +237,16 @@ MonoBehaviour:
   _rows: 27
   _extent: {x: 2, y: 1.125}
   _source: {fileID: 8400000, guid: 14c27166eff2818458abea2e9295eae5, type: 2}
-  _decaySpeed: 4
-  _scale: 0.12
-  _material: {fileID: 2100000, guid: a8647c100ce0a46499c1fbf9a4cd72af, type: 2}
+  _threshold: 0.08
+  _decaySpeed: 3.4
+  _voxelScale: 0.22
+  _voxelMaterial: {fileID: 2100000, guid: a8647c100ce0a46499c1fbf9a4cd72af, type: 2}
+  _zMove: -0.2
+  _noiseFrequency: 10
+  _noiseSpeed: 0.6
+  _noiseToPosition: 0.012
+  _noiseToRotation: 70
+  _noiseToScale: 0.5
   _debug: 0
   _baseMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   _feedbackShader: {fileID: 4800000, guid: ef10d4a521db6da48b2bed05eba76881, type: 3}
@@ -377,8 +384,8 @@ Light:
   serializedVersion: 8
   m_Type: 2
   m_Color: {r: 0.64705884, g: 0.69330627, b: 1, a: 1}
-  m_Intensity: 1
-  m_Range: 1.2
+  m_Intensity: 1.3
+  m_Range: 1.4
   m_SpotAngle: 30
   m_CookieSize: 10
   m_Shadows:
@@ -492,7 +499,6 @@ GameObject:
   - component: {fileID: 1769101558}
   - component: {fileID: 1769101557}
   - component: {fileID: 1769101562}
-  - component: {fileID: 1769101561}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -518,7 +524,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 100
-  field of view: 12
+  field of view: 11
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -570,20 +576,6 @@ Transform:
   m_Father: {fileID: 133492753}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1769101561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1769101555}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8fcefc19977256540b441751a463e97f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _fillColor: {r: 0, g: 0, b: 0, a: 1}
-  _lineColor: {r: 1, g: 1, b: 1, a: 1}
-  _shader: {fileID: 4800000, guid: f33eba059cc36df4aa294173b81db4b6, type: 3}
 --- !u!114 &1769101562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,7 +587,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d901ddf32d7c84ed4b0f84623ef3a7a0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _intensity: 1
+  _intensity: 1.2
   _radius: 0.4
   _sampleCount: 3
   _sampleCountValue: 24
