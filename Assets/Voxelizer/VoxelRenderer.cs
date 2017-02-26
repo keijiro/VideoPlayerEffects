@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Video;
 using System.Collections.Generic;
 
 namespace Voxelizer
@@ -12,7 +13,8 @@ namespace Voxelizer
         [SerializeField] int _rows = 18;
         [SerializeField] Vector2 _extent = new Vector2(3.2f, 1.8f);
         [Space]
-        [SerializeField] RenderTexture _source;
+        [SerializeField] VideoPlayer _sourceVideo;
+        [SerializeField] RenderTexture _sourceTexture;
         [SerializeField, Range(0, 1)] float _threshold = 0.05f;
         [SerializeField, Range(1, 10)] float _decaySpeed = 5;
         [Space]
@@ -73,13 +75,16 @@ namespace Voxelizer
         void Update()
         {
             var rt = RenderTexture.GetTemporary(
-                _source.width / 4, _source.height / 4, 0, RenderTextureFormat.RHalf
+                _columns, _rows, 0, RenderTextureFormat.RHalf
             );
 
             _feedbackMaterial.SetTexture("_PrevTex", _feedbackBuffer);
             _feedbackMaterial.SetFloat("_Convergence", -_decaySpeed);
 
-            Graphics.Blit(_source, rt, _feedbackMaterial, 0);
+            if (_sourceVideo != null)
+                Graphics.Blit(_sourceVideo.texture, rt, _feedbackMaterial, 0);
+            else
+                Graphics.Blit(_sourceTexture, rt, _feedbackMaterial, 0);
 
             if (_feedbackBuffer != null)
                 RenderTexture.ReleaseTemporary(_feedbackBuffer);
