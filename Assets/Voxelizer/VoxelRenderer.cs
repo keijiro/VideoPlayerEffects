@@ -11,8 +11,10 @@ namespace Voxelizer
         [SerializeField] int _rows = 18;
         [SerializeField] Vector2 _extent = new Vector2(3.2f, 1.8f);
         [SerializeField] RenderTexture _source;
+        [SerializeField, Range(1, 10)] float _decaySpeed = 5;
         [SerializeField] float _scale = 0.1f;
         [SerializeField] Material _material;
+        [SerializeField] bool _debug;
 
         #endregion
 
@@ -23,6 +25,8 @@ namespace Voxelizer
 
         [SerializeField, HideInInspector] Shader _feedbackShader;
         Material _feedbackMaterial;
+
+        [SerializeField, HideInInspector] Mesh _quadMesh;
 
         RenderTexture _feedbackBuffer;
         MaterialPropertyBlock _props;
@@ -57,10 +61,11 @@ namespace Voxelizer
         void Update()
         {
             var rt = RenderTexture.GetTemporary(
-                _source.width, _source.height, 0, RenderTextureFormat.ARGBHalf
+                _source.width, _source.height, 0, RenderTextureFormat.RHalf
             );
 
             _feedbackMaterial.SetTexture("_PrevTex", _feedbackBuffer);
+            _feedbackMaterial.SetFloat("_Convergence", -_decaySpeed);
             Graphics.Blit(_source, rt, _feedbackMaterial, 0);
 
             if (_feedbackBuffer != null)
@@ -75,6 +80,15 @@ namespace Voxelizer
                 _bulkMesh, transform.localToWorldMatrix, _material,
                 gameObject.layer, null, 0, _props
             );
+        }
+
+        void OnRenderObject()
+        {
+            if (_debug)
+            {
+                _feedbackMaterial.SetPass(1);
+                Graphics.DrawMeshNow(_quadMesh, Matrix4x4.identity);
+            }
         }
 
         #endregion

@@ -1,14 +1,15 @@
 fileFormatVersion: 2
 guid: 2dbe722497769624f83933be6ea0a56a
-timeCreated: 1488025919
+timeCreated: 1488087830
 licenseType: Pro
 MonoImporter:
   serializedVersion: 2
   defaultReferences:
   - _source: {instanceID: 0}
   - _material: {instanceID: 0}
-  - _feedbackShader: {fileID: 4800000, guid: ef10d4a521db6da48b2bed05eba76881, type: 3}
   - _baseMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+  - _feedbackShader: {fileID: 4800000, guid: ef10d4a521db6da48b2bed05eba76881, type: 3}
+  - _quadMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

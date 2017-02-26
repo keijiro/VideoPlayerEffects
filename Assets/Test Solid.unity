@@ -237,10 +237,13 @@ MonoBehaviour:
   _rows: 27
   _extent: {x: 2, y: 1.125}
   _source: {fileID: 8400000, guid: 14c27166eff2818458abea2e9295eae5, type: 2}
+  _decaySpeed: 4
   _scale: 0.12
   _material: {fileID: 2100000, guid: a8647c100ce0a46499c1fbf9a4cd72af, type: 2}
+  _debug: 0
   _baseMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   _feedbackShader: {fileID: 4800000, guid: ef10d4a521db6da48b2bed05eba76881, type: 3}
+  _quadMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &561893518
 Transform:
   m_ObjectHideFlags: 0
@@ -310,7 +313,7 @@ Light:
   serializedVersion: 8
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1.4
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_CookieSize: 10

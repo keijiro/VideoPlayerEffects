@@ -35,9 +35,9 @@ void ModifyVertex(inout float3 vp, inout float3 norm, float2 uv)
 {
     float3 sn = snoise(uv * 8.3 + float2(0, _Time.y * 0.6));
 
-    float3 samp = tex2Dlod(_ModTex, float4(uv, 0, 0)).xyz;
+    float samp = tex2Dlod(_ModTex, float4(uv, 0, 0)).r;
 
-    float l = pow(saturate((Luminance(samp) - 0.05) / 0.95), 0.25);
+    float l = pow(saturate((samp - 0.05) / 0.95), 0.25);
 
     float3 dpos = float3(_Extent * (uv - 0.5f) + sn.xy * _Scale * 0.3 * (1 - l), -0.1f * l);
 

@@ -239,8 +239,10 @@ MonoBehaviour:
   _source: {fileID: 8400000, guid: 14c27166eff2818458abea2e9295eae5, type: 2}
   _scale: 0.08
   _material: {fileID: 2100000, guid: 16564f4dd23f1ac46b7d0034e7ce90f9, type: 2}
+  _debug: 0
   _baseMesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
   _feedbackShader: {fileID: 4800000, guid: ef10d4a521db6da48b2bed05eba76881, type: 3}
+  _quadMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!4 &561893518
 Transform:
   m_ObjectHideFlags: 0
