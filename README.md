@@ -19,6 +19,11 @@ License
 Acknowledgement
 ---------------
 
-The test footage used in the examples (Vicky.mp4) was obtained from
-[freestockfootage](https://www.youtube.com/channel/UC7FcCAqvq56nQLc2bCnkang).
-See their YouTube channel page for futher details.
+The footages used in the examples are originally created by the authors
+descripbed below. See Acknowledgement.txt for further details.
+
+- "Free Dance Footage FULL HD" by freestockfootage
+  https://www.youtube.com/watch?v=xhYA9jD8gH8
+
+- "\#INTRODUCTIONS" by LaBeouf, Rönkkö & Turner
+  https://vimeo.com/125095515
