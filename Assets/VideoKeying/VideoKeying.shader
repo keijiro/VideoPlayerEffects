@@ -12,9 +12,9 @@
     sampler2D _MainTex;
     float4 _MainTex_TexelSize;
 
-    fixed3 _Params; // (threshold, tolerance, spill removal)
-    fixed2 _CgCo;
-    fixed3 _Chroma;
+    fixed2 _CgCo;  // Key color as YCgCo without Y
+    fixed2 _Matte; // (threshold, threshold + tolerance)
+    fixed2 _Spill; // (strength, saturation)
     half2 _BlurDir;
 
     // Keying shader
@@ -42,12 +42,13 @@
 
         // chroma-difference based alpha
         half dist = distance(src_ycgco.yz, _CgCo);
-        half alpha = smoothstep(_Params.x, _Params.x + _Params.y, dist);
+        half alpha = smoothstep(_Matte.x, _Matte.y, dist);
 
         // Spill removal
-        half2 cgco = src_ycgco.yz - _CgCo * saturate(1 - dist * _Params.z);
-        cgco *= saturate(dist * _Params.z * 0.5);
-        src = YCgCo2RGB(half3(src_ycgco.x, clamp(cgco, -0.5, 0.5)));
+        half2 cgco = src_ycgco.yz;
+        cgco -= _CgCo * (dot(_CgCo, cgco) / dot(_CgCo, _CgCo) + 0.5) * _Spill.x;
+        cgco = clamp(cgco, -0.5, 0.5) * _Spill.y;
+        src = YCgCo2RGB(half3(src_ycgco.x, cgco));
 
         return fixed4(GammaToLinearSpace(src), alpha);
     }

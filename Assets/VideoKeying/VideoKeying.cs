@@ -7,11 +7,19 @@ namespace VideoPlayerEffects
     {
         #region Editable properties
 
-        [SerializeField] VideoPlayer _source;
-        [SerializeField, ColorUsage(false)] Color _color = Color.green;
-        [SerializeField, Range(0, 100)] float _threshold = 50;
-        [SerializeField, Range(0, 100)] float _tolerance = 20;
-        [SerializeField, Range(0, 100)] float _spillRemoval = 50;
+        [SerializeField] VideoPlayer _sourceVideo;
+        [SerializeField] RenderTexture _sourceTexture;
+
+        [Header("Matte Generation")]
+        [SerializeField, ColorUsage(false)] Color _keyColor = Color.green;
+        [SerializeField, Range(0, 1)] float _threshold = 0.5f;
+        [SerializeField, Range(0, 1)] float _tolerance = 0.2f;
+
+        [Header("Spill Removal")]
+        [SerializeField, Range(0, 1)] float _spillRemoval = 0.5f;
+        [SerializeField, Range(0, 1)] float _desaturate = 0.2f;
+
+        [Space]
         [SerializeField] bool _debug;
 
         #endregion
@@ -64,21 +72,21 @@ namespace VideoPlayerEffects
         {
             if (_buffer != null) RenderTexture.ReleaseTemporary(_buffer);
 
-            var source = _source.texture;
+            var source = _sourceVideo != null ? _sourceVideo.texture : _sourceTexture;
             if (source == null) return;
 
             var rt1 = RenderTexture.GetTemporary(source.width, source.height);
             var rt2 = RenderTexture.GetTemporary(source.width, source.height);
 
-            _material.SetVector("_Params", new Vector3(
-                _threshold * 0.001f, _tolerance * 0.001f, 10 - _spillRemoval * 0.1f
-            ));
-
             // Keying
-            var ycgco = RGB2YCgCo(_color);
-            var chroma = YCgCo2RGB(new Vector3(0, ycgco.y, ycgco.z));
+            var ycgco = RGB2YCgCo(_keyColor);
             _material.SetVector("_CgCo", new Vector2(ycgco.y, ycgco.z));
-            _material.SetVector("_Chroma", chroma);
+            _material.SetVector("_Matte", new Vector2(
+                _threshold * 0.1f, (_threshold + _tolerance) * 0.1f
+            ));
+            _material.SetVector("_Spill", new Vector2(
+                _spillRemoval, 1 - _desaturate
+            ));
             Graphics.Blit(source, rt1, _material, 0);
 
             // Alpha dilate
