@@ -74,6 +74,7 @@ LightmapSettings:
     m_MixedBakeMode: 3
     m_BakeBackend: 0
     m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
     m_PVRFiltering: 0
@@ -174,7 +175,7 @@ VideoPlayer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 561893516}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32700000, guid: 8ebca7de6e727394bb8043f6ef363700, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 8ebca7de6e727394bb8043f6ef363700, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera: {fileID: 1852574363}
   m_TargetTexture: {fileID: 0}

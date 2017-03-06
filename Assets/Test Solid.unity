@@ -74,6 +74,7 @@ LightmapSettings:
     m_MixedBakeMode: 3
     m_BakeBackend: 0
     m_PVRSampling: 1
+    m_PVRDirectSampleCount: 32
     m_PVRSampleCount: 500
     m_PVRBounces: 2
     m_PVRFiltering: 0
@@ -174,7 +175,7 @@ VideoPlayer:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 561893516}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32700000, guid: 8ebca7de6e727394bb8043f6ef363700, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: 8ebca7de6e727394bb8043f6ef363700, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera: {fileID: 1852574363}
   m_TargetTexture: {fileID: 0}
@@ -245,7 +246,8 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_CCT: 6500
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &642843951
@@ -309,7 +311,8 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_CCT: 6500
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1203009273
@@ -373,7 +376,8 @@ Light:
   m_Lightmapping: 4
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1
-  m_CCT: 6500
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
 --- !u!4 &1386618407
