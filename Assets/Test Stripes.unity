@@ -149,6 +149,7 @@ VideoPlayer:
   m_TargetCamera: {fileID: 1852574363}
   m_TargetTexture: {fileID: 0}
   m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: 
   m_RenderMode: 1
   m_AspectRatio: 1
   m_DataSource: 0
@@ -157,8 +158,6 @@ VideoPlayer:
   m_TargetAudioSources: []
   m_DirectAudioVolumes: []
   m_Url: 
-  m_TargetMaterialName: 
-  m_TargetMaterialProperty: 
   m_EnabledAudioTracks: 
   m_DirectAudioMutes: 
   m_ControlledAudioTrackCount: 0
@@ -3389,6 +3388,7 @@ GameObject:
   - component: {fileID: 1769101557}
   - component: {fileID: 1769101562}
   - component: {fileID: 1769101561}
+  - component: {fileID: 1769101563}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -3472,7 +3472,7 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1769101555}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f6059167d39100458180e5be5d175a9, type: 3}
   m_Name: 
@@ -3509,6 +3509,24 @@ MonoBehaviour:
   _ambientOnly: 0
   _aoShader: {fileID: 4800000, guid: 7541b5f18b1224a81927d8b1184b122b, type: 3}
   _quadMesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1769101563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1769101555}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 418eec6c28e29bb4b80050f5f4835f4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _sourceVideo: {fileID: 561893519}
+  _sourceTexture: {fileID: 0}
+  _backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  _fillColor: {r: 0, g: 0, b: 0, a: 1}
+  _resolution: 50
+  _angle: 30
+  _shader: {fileID: 4800000, guid: 2d471d5227309364aae67c8bc486933b, type: 3}
 --- !u!1 &1852574362
 GameObject:
   m_ObjectHideFlags: 0
