@@ -50,7 +50,7 @@ VideoClipImporter:
     encodedStartFrame: 0
     encodedEndFrame: 229
     streamedResource:
-      source: Assets/LaBeouf/JustDoIt.mp4
+      source: 
       offset: 0
       size: 9855430
   userData: 

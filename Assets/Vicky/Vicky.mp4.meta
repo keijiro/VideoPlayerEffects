@@ -41,7 +41,7 @@ VideoClipImporter:
     encodedStartFrame: 0
     encodedEndFrame: 784
     streamedResource:
-      source: Assets/Vicky/Vicky.mp4
+      source: 
       offset: 0
       size: 6963315
   userData: 

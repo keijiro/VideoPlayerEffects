@@ -38,6 +38,9 @@
     fixed4 FragKeying(v2f_img i) : SV_Target
     {
         fixed3 src = tex2D(_MainTex, i.uv);
+        #if !defined(UNITY_COLORSPACE_GAMMA)
+        src = LinearToGammaSpace(src);
+        #endif
         fixed3 src_ycgco = RGB2YCgCo(src);
 
         // chroma-difference based alpha
@@ -48,9 +51,12 @@
         half2 cgco = src_ycgco.yz;
         cgco -= _CgCo * (dot(_CgCo, cgco) / dot(_CgCo, _CgCo) + 0.5) * _Spill.x;
         cgco = clamp(cgco, -0.5, 0.5) * _Spill.y;
-        src = YCgCo2RGB(half3(src_ycgco.x, cgco));
+        half3 rgb = YCgCo2RGB(half3(src_ycgco.x, cgco));
 
-        return fixed4(GammaToLinearSpace(src), alpha);
+        #if !defined(UNITY_COLORSPACE_GAMMA)
+        rgb = GammaToLinearSpace(rgb);
+        #endif
+        return fixed4(rgb, alpha);
     }
 
     // Alpha dilate shader
@@ -120,6 +126,7 @@
             CGPROGRAM
             #pragma vertex vert_img
             #pragma fragment FragKeying
+            #pragma multi_compile __ UNITY_COLORSPACE_GAMMA
             ENDCG
         }
         Pass

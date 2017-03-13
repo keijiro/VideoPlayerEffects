@@ -158,18 +158,17 @@ VideoPlayer:
   m_TargetCamera: {fileID: 347202047}
   m_TargetTexture: {fileID: 0}
   m_TargetMaterialRenderer: {fileID: 0}
+  m_TargetMaterialProperty: 
   m_RenderMode: 4
   m_AspectRatio: 2
   m_DataSource: 0
   m_PlaybackSpeed: 1
-  m_AudioOutputMode: 2
+  m_AudioOutputMode: 0
   m_TargetAudioSources:
   - {fileID: 0}
   m_DirectAudioVolumes:
   - 1
   m_Url: 
-  m_TargetMaterialName: 
-  m_TargetMaterialProperty: 
   m_EnabledAudioTracks: 01
   m_DirectAudioMutes: 00
   m_ControlledAudioTrackCount: 1
