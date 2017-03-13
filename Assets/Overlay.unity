@@ -3472,22 +3472,22 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1769101555}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3f6059167d39100458180e5be5d175a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _videoInput: {fileID: 561893519}
-  _colorTint: {r: 1, g: 1, b: 1, a: 1}
-  _sourceOpacity: 0.15
-  _repeat: 30
-  _angle: 50
-  _minWidth: 1
-  _maxWidth: 10
-  _waveSpeed: 0.3
-  _waveModulation: 0.9
-  _waveFrequency: 0.12
-  _waveHeight: 4
+  _sourceVideo: {fileID: 561893519}
+  _sourceTexture: {fileID: 0}
+  _strokeColor: {r: 1, g: 1, b: 1, a: 1}
+  _backgroundColor: {r: 0, g: 0, b: 0, a: 1}
+  _angle: 30
+  _repeat: 24
+  _width: 0.4
+  _thinLine: 1.15
+  _noiseFrequency: 0.6
+  _noiseAnimation: 0.3
+  _noiseAmplitude: 4
   _shader: {fileID: 4800000, guid: c3a6e6aff1de6dc48aaba2438c624397, type: 3}
 --- !u!114 &1769101562
 MonoBehaviour:
@@ -3515,15 +3515,15 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1769101555}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 418eec6c28e29bb4b80050f5f4835f4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _sourceVideo: {fileID: 561893519}
   _sourceTexture: {fileID: 0}
-  _backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   _fillColor: {r: 0, g: 0, b: 0, a: 1}
+  _backgroundColor: {r: 1, g: 1, b: 1, a: 1}
   _resolution: 50
   _angle: 30
   _shader: {fileID: 4800000, guid: 2d471d5227309364aae67c8bc486933b, type: 3}

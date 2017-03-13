@@ -4,8 +4,6 @@
     {
         _MainTex("", 2D) = "black"{}
         _SourceTex("", 2D) = "black"{}
-        _Color("", Color) = (1, 1, 1, 1)
-        _BGColor("", Color) = (0, 0, 0, 0)
     }
 
     CGINCLUDE
@@ -15,8 +13,8 @@
     sampler2D _MainTex;
     sampler2D _SourceTex;
 
-    half4 _Color;
-    half4 _BGColor;
+    half4 _Color;   // given as gamma
+    half4 _BGColor; // given as gamma
 
     float4 _UV2Grid;
     float4 _Grid2UV;
@@ -70,6 +68,11 @@
         half4 src = tex2D(_MainTex, i.uv);
         src.rgb = lerp(src.rgb, _BGColor.rgb, _BGColor.a);
         half3 rgb = lerp(src.rgb, _Color.rgb, _Color.a * t);
+
+        #if !defined(UNITY_COLORSPACE_GAMMA)
+        rgb = GammaToLinearSpace(rgb);
+        #endif
+
         return half4(rgb, src.a);
     }
 
@@ -81,6 +84,7 @@
         Pass
         {
             CGPROGRAM
+            #pragma multi_compile __ UNITY_COLORSPACE_GAMMA
             #pragma vertex vert_img
             #pragma fragment frag
             ENDCG
