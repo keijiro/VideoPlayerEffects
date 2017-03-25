@@ -1,4 +1,4 @@
-﻿Shader "Hidden/VideoOverlayEffects/Stripe"
+﻿Shader "Hidden/VideoEffects/Overlay/Stripe"
 {
     Properties
     {
@@ -46,9 +46,11 @@
 
         // Color blending.
         half4 src = tex2D(_MainTex, i.uv);
+        #if !defined(UNITY_COLORSPACE_GAMMA)
+        src.rgb = LinearToGammaSpace(src.rgb);
+        #endif
         src.rgb = lerp(src.rgb, _BGColor.rgb, _BGColor.a);
         half3 rgb = lerp(src.rgb, _Color.rgb, _Color.a * t);
-
         #if !defined(UNITY_COLORSPACE_GAMMA)
         rgb = GammaToLinearSpace(rgb);
         #endif
