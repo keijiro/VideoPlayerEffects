@@ -1,6 +1,3 @@
-// Upgrade NOTE: commented out 'float4x4 _WorldToCamera', a built-in variable
-// Upgrade NOTE: replaced '_WorldToCamera' with 'unity_WorldToCamera'
-
 //
 // Kino/Obscurance - Screen space ambient obscurance image effect
 //
@@ -71,7 +68,6 @@ static const float kEpsilon = 1e-4;
 sampler2D _CameraGBufferTexture2;
 sampler2D_float _CameraDepthTexture;
 sampler2D _CameraDepthNormalsTexture;
-// float4x4 _WorldToCamera;
 
 // Sample count
 #if !defined(SHADER_API_GLES)
@@ -196,12 +192,15 @@ v2f vert(appdata_img v)
 #endif
 
     v2f o;
-#if defined(UNITY_SINGLE_PASS_STEREO)
+#if UNITY_VERSION >= 540
     o.pos = UnityObjectToClipPos(v.vertex);
+#else
+    o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
+#endif
+#if defined(UNITY_SINGLE_PASS_STEREO)
     o.uv = UnityStereoScreenSpaceUVAdjust(v.texcoord, _MainTex_ST);
     o.uvAlt = UnityStereoScreenSpaceUVAdjust(uvAlt, _MainTex_ST);
 #else
-    o.pos = mul(UNITY_MATRIX_MVP, v.vertex);
     o.uv = v.texcoord;
     o.uvAlt = uvAlt;
 #endif
