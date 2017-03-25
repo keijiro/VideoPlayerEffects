@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Voxelizer/Feedback"
+﻿Shader "Hidden/VideoEffects/Voxelizer/Feedback"
 {
     Properties
     {

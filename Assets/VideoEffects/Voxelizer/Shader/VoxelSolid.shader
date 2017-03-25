@@ -1,4 +1,4 @@
-﻿Shader "Voxelizer/Solid"
+﻿Shader "VideoEffects/Voxelizer/Solid"
 {
     Properties
     {

@@ -1,4 +1,4 @@
-﻿Shader "Voxelizer/Wire Setup"
+﻿Shader "VideoEffects/Voxelizer/Wire Setup"
 {
     Properties
     {

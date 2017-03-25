@@ -2,7 +2,7 @@
 using UnityEngine.Video;
 using System.Collections.Generic;
 
-namespace Voxelizer
+namespace VideoEffects.Voxelizer
 {
     public class VoxelRenderer : MonoBehaviour
     {

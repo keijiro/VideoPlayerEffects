@@ -1,4 +1,4 @@
-﻿Shader "Hidden/Voxelizer/PostFx"
+﻿Shader "Hidden/VideoEffects/Voxelizer/PostFx"
 {
     Properties
     {

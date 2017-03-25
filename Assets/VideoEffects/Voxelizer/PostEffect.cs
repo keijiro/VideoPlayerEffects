@@ -1,7 +1,8 @@
 using UnityEngine;
 
-namespace Voxelizer
+namespace VideoEffects.Voxelizer
 {
+    [ExecuteInEditMode]
     [RequireComponent(typeof(Camera))]
     public class PostEffect : MonoBehaviour
     {
@@ -24,20 +25,26 @@ namespace Voxelizer
 
         #region MonoBehaviour functions
 
-        void Start()
-        {
-            _material = new Material(_shader);
-        }
-
         void OnDestroy()
         {
-            Destroy(_material);
+            if (_material != null)
+                if (Application.isPlaying)
+                    Destroy(_material);
+                else
+                    DestroyImmediate(_material);
         }
 
         void OnRenderImage(RenderTexture source, RenderTexture destination)
         {
+            if (_material == null)
+            {
+                _material = new Material(_shader);
+                _material.hideFlags = HideFlags.DontSave;
+            }
+
             _material.SetColor("_FillColor", _fillColor);
             _material.SetColor("_LineColor", _lineColor);
+
             Graphics.Blit(source, destination, _material, 0);
         }
 
