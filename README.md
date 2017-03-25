@@ -7,9 +7,21 @@ the newly introduced VideoPlayer component.
 ![gif](http://i.imgur.com/XQD2LDP.gif)
 ![gif](http://i.imgur.com/gOBZWmO.gif)
 
-Unity 5.6 or later is required to use the effects. Note that 5.6 is still
-in the beta phase at the time this is written -- it could have problems with
-a release version.
+System Requirements
+-------------------
+
+- Unity 5.6 or later
+
+Although the effects in this repository would work on most of the platforms
+that Unity supports, VideoPlayer is not available on some of them at the moment.
+
+Related Project
+---------------
+
+The keying effect that has been once developed in this repository was moved
+to its own repository. See [ProcAmp] for details.
+
+[ProcAmp]: https://github.com/keijiro/ProcAmp
 
 License
 -------
